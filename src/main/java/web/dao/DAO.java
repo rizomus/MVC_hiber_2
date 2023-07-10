@@ -1,7 +1,7 @@
 package web.dao;
 
 import org.springframework.transaction.annotation.Transactional;
-import web.models.User;
+import web.model.User;
 
 import java.util.List;
 
