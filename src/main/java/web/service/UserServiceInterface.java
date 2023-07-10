@@ -5,20 +5,16 @@ import web.model.User;
 
 import java.util.List;
 
-public interface PersonServiseInterface {
+public interface UserServiceInterface {
 
-    @Transactional(readOnly = true)
-    List<User> index();
 
-    @Transactional(readOnly = true)
+    List<User> allUsers();
+
     User show(int id);
 
-    @Transactional
     void save(User user);
 
-    @Transactional
     void update(int id, User updatedUser);
 
-    @Transactional
     void delete(int id);
 }
