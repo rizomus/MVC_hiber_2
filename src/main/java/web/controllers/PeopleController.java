@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import web.models.Person;
+import web.models.User;
 import web.service.PersonServiseInterface;
 
 import javax.validation.Valid;
@@ -34,17 +34,17 @@ public class PeopleController {
     }
 
     @GetMapping("/new")
-    public String newPerson(@ModelAttribute("person") Person person) {
+    public String newPerson(@ModelAttribute("person") User user) {
         return "people/new";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("person") @Valid Person person,
+    public String create(@ModelAttribute("person") @Valid User user,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "people/new";
 
-        personServise.save(person);
+        personServise.save(user);
         return "redirect:/people";
     }
 
@@ -55,12 +55,12 @@ public class PeopleController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
+    public String update(@ModelAttribute("person") @Valid User user, BindingResult bindingResult,
                          @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "people/edit";
 
-        personServise.update(id, person);
+        personServise.update(id, user);
         return "redirect:/people";
     }
 

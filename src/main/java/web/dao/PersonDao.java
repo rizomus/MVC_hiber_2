@@ -1,11 +1,8 @@
 package web.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import web.models.Person;
+import web.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,32 +17,32 @@ public class PersonDao implements DAO {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Person> index() {
+    public List<User> index() {
 
-        return entityManager.createQuery("select p from Person p", Person.class).getResultList();
+        return entityManager.createQuery("select p from User p", User.class).getResultList();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Person show(int id) {
-        return entityManager.find(Person.class, id);
+    public User show(int id) {
+        return entityManager.find(User.class, id);
     }
 
     @Override
     @Transactional
-    public void save(Person person) {
+    public void save(User user) {
 
-        entityManager.persist(person);
+        entityManager.persist(user);
     }
 
     @Override
     @Transactional
-    public void update(int id, Person updatedPerson) {
+    public void update(int id, User updatedUser) {
 
-        Person personToBeUpdated = show(id);
-        personToBeUpdated.setName(updatedPerson.getName());
-        personToBeUpdated.setAge(updatedPerson.getAge());
-        personToBeUpdated.setEmail(updatedPerson.getEmail());
+        User userToBeUpdated = show(id);
+        userToBeUpdated.setName(updatedUser.getName());
+        userToBeUpdated.setAge(updatedUser.getAge());
+        userToBeUpdated.setEmail(updatedUser.getEmail());
     }
 
     @Override

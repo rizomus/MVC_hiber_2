@@ -1,23 +1,23 @@
 package web.service;
 
 import org.springframework.transaction.annotation.Transactional;
-import web.models.Person;
+import web.models.User;
 
 import java.util.List;
 
 public interface PersonServiseInterface {
 
     @Transactional(readOnly = true)
-    List<Person> index();
+    List<User> index();
 
     @Transactional(readOnly = true)
-    Person show(int id);
+    User show(int id);
 
     @Transactional
-    void save(Person person);
+    void save(User user);
 
     @Transactional
-    void update(int id, Person updatedPerson);
+    void update(int id, User updatedUser);
 
     @Transactional
     void delete(int id);

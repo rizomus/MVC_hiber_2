@@ -1,11 +1,9 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import web.dao.DAO;
-import web.models.Person;
+import web.models.User;
 
 import java.util.List;
 
@@ -16,23 +14,23 @@ public class PersonService implements PersonServiseInterface {
     private DAO PersonDAO;
 
     @Override
-    public List<Person> index() {
+    public List<User> index() {
         return PersonDAO.index();
     }
 
     @Override
-    public Person show(int id) {
+    public User show(int id) {
         return PersonDAO.show(id);
     }
 
     @Override
-    public void save(Person person) {
-        PersonDAO.save(person);
+    public void save(User user) {
+        PersonDAO.save(user);
     }
 
     @Override
-    public void update(int id, Person updatedPerson) {
-        PersonDAO.update(id, updatedPerson);
+    public void update(int id, User updatedUser) {
+        PersonDAO.update(id, updatedUser);
     }
 
     @Override
