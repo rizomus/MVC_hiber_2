@@ -4,7 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import web.model.User;
 import web.service.UserServiceInterface;
 
@@ -21,14 +27,14 @@ public class UsersController {
         this.userService = userServise;
     }
 
-    @GetMapping()
+    @GetMapping
     public String allUsers(Model model) {
         model.addAttribute("users", userService.allUsers());
         return "users/allUsers";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable int id, Model model) {
         model.addAttribute("user", userService.show(id));
         return "users/show";
     }
@@ -38,7 +44,7 @@ public class UsersController {
         return "users/new";
     }
 
-    @PostMapping()
+    @PostMapping
     public String create(@ModelAttribute("user") @Valid User user,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
@@ -49,14 +55,14 @@ public class UsersController {
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
+    public String edit(Model model, @PathVariable int id) {
         model.addAttribute("user", userService.show(id));
         return "users/edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-                         @PathVariable("id") int id) {
+                         @PathVariable int id) {
         if (bindingResult.hasErrors())
             return "users/edit";
 
@@ -65,7 +71,7 @@ public class UsersController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public String delete(@PathVariable int id) {
         userService.delete(id);
         return "redirect:/users";
     }
