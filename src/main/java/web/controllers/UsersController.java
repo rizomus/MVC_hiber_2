@@ -12,24 +12,24 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/people")
-public class PeopleController {
+public class UsersController {
 
-    private final PersonServiseInterface personServise;
+    private final PersonServiseInterface userServise;
 
     @Autowired
-    public PeopleController(PersonServiseInterface personServise) {
-        this.personServise = personServise;
+    public UsersController(PersonServiseInterface userServise) {
+        this.userServise = userServise;
     }
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("people", personServise.index());
+        model.addAttribute("people", userServise.index());
         return "people/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", personServise.show(id));
+        model.addAttribute("person", userServise.show(id));
         return "people/show";
     }
 
@@ -44,13 +44,13 @@ public class PeopleController {
         if (bindingResult.hasErrors())
             return "people/new";
 
-        personServise.save(user);
+        userServise.save(user);
         return "redirect:/people";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", personServise.show(id));
+        model.addAttribute("person", userServise.show(id));
         return "people/edit";
     }
 
@@ -60,13 +60,13 @@ public class PeopleController {
         if (bindingResult.hasErrors())
             return "people/edit";
 
-        personServise.update(id, user);
+        userServise.update(id, user);
         return "redirect:/people";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        personServise.delete(id);
+        userServise.delete(id);
         return "redirect:/people";
     }
 }
