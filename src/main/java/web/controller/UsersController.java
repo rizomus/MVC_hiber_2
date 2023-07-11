@@ -40,12 +40,12 @@ public class UsersController {
     }
 
     @GetMapping("/new")
-    public String newPerson(@ModelAttribute("user") User user) {
+    public String newPerson(@ModelAttribute User user) {
         return "users/new";
     }
 
     @PostMapping
-    public String create(@ModelAttribute("user") @Valid User user,
+    public String create(@ModelAttribute @Valid User user,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "users/new";
@@ -61,7 +61,7 @@ public class UsersController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
+    public String update(@ModelAttribute @Valid User user, BindingResult bindingResult,
                          @PathVariable int id) {
         if (bindingResult.hasErrors())
             return "users/edit";
